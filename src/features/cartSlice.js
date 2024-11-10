@@ -28,13 +28,13 @@ const cartSlice = createSlice({
     removeFromCart: (state, action) => {
       const existingProduct = state.cart.find((item) => item.id === action.payload.id);
       if (existingProduct) {
+        state.totalQuantity -= 1;
+        state.totalPrice -= action.payload.price;
         if (existingProduct.quantity > 1) {
           existingProduct.quantity -= 1;
         } else {
           state.cart = state.cart.filter((item) => item.id !== action.payload.id);
         }
-        state.totalQuantity -= 1;
-        state.totalPrice -= action.payload.price;
       }
     },
   },

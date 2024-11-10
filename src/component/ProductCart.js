@@ -15,7 +15,7 @@ import { fetchProducts, addToCart, removeFromCart } from "../features/cartSlice"
 
 export default function ProductCart() {
   const dispatch = useDispatch();
-  const { products, cart, totalPrice } = useSelector((state) => state.cart);
+  const { products } = useSelector((state) => state.cart);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -43,31 +43,6 @@ export default function ProductCart() {
           </MDBCol>
         ))}
       </MDBRow>
-
-      <div className="cart-section">
-        <h4>Cart</h4>
-        {cart.length > 0 ? (
-          <div>
-            {cart.map((item) => (
-              <div key={item.id} className="cart-item">
-                <span>
-                  {item.title} (x{item.quantity})
-                </span>
-                <MDBBtn
-                  color="danger"
-                  size="sm"
-                  onClick={() => dispatch(removeFromCart(item))}
-                >
-                  Remove
-                </MDBBtn>
-              </div>
-            ))}
-            <div className="cart-total">Total Price: ${totalPrice.toFixed(2)}</div>
-          </div>
-        ) : (
-          <p>Your cart is empty</p>
-        )}
-      </div>
     </MDBContainer>
   );
 }
